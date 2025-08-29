@@ -104,7 +104,7 @@ class Upsample(nn.Module):
                 x, (x.shape[2], x.shape[3] * 2, x.shape[4] * 2), mode="nearest"
             )
         else:
-            x = F.interpolate(x, scale_factor=2, mode="nearest")
+            x = F.interpolate(x.to(th.float16), scale_factor=2, mode="nearest").to(x.dtype) # Since it doesnt support bfloat16
         if self.use_conv:
             x = self.conv(x)
         return x
