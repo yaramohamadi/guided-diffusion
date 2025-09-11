@@ -476,6 +476,9 @@ class UNetModel(nn.Module):
 
         if self.num_classes is not None:
             self.label_emb = nn.Embedding(num_classes, time_embed_dim)
+            # --- zero-init so conditioning is a no-op at step 0 ---
+            with th.no_grad():
+                self.label_emb.weight.zero_()
 
         ch = input_ch = int(channel_mult[0] * model_channels)
         self.input_blocks = nn.ModuleList(
