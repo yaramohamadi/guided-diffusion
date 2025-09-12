@@ -5,7 +5,7 @@ from . import gaussian_diffusion as gd
 from .respace import SpacedDiffusion, space_timesteps
 from .unet import SuperResModel, UNetModel, EncoderUNetModel
 
-NUM_CLASSES = 1000
+NUM_CLASSES = 10
 
 
 def diffusion_defaults():
@@ -111,7 +111,7 @@ def create_model_and_diffusion(
         use_scale_shift_norm=use_scale_shift_norm,
         dropout=dropout,
         resblock_updown=resblock_updown,
-        use_fp16=use_fp16,
+        use_fp16=False,
         use_new_attention_order=use_new_attention_order,
     )
     diffusion = create_gaussian_diffusion(
